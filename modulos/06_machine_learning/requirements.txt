@@ -1,0 +1,67 @@
+# Módulo 6: Machine Learning
+# Scikit-learn, XGBoost, modelos, evaluación, feature engineering
+
+# Jupyter y extensiones
+jupyterlab==4.0.9
+notebook==7.0.6
+ipywidgets==8.1.1
+jupyter-dash==0.4.2
+
+# Machine Learning core
+scikit-learn==1.3.2
+xgboost==2.0.2
+lightgbm==4.1.0
+catboost==1.2.2
+
+# Análisis de datos
+pandas==2.1.4
+numpy==1.24.4
+scipy==1.11.4
+
+# Visualización
+matplotlib==3.8.2
+seaborn==0.13.0
+plotly==5.17.0
+
+# Feature engineering
+feature-engine==1.6.2
+category-encoders==2.6.3
+imbalanced-learn==0.11.0
+
+# Optimización de hiperparámetros
+optuna==3.4.0
+hyperopt==0.2.7
+scikit-optimize==0.9.0
+
+# Validación y métricas
+mlxtend==0.23.0
+
+# Modelos específicos
+statsmodels==0.14.0
+
+# Procesamiento de texto (NLP básico)
+nltk==3.8.1
+spacy==3.7.2
+textblob==0.17.1
+
+# Computer Vision básico
+opencv-python==4.8.1.78
+pillow==10.1.0
+
+# MLOps básico
+mlflow==2.8.1
+joblib==1.3.2
+
+# Testing
+pytest==7.4.3
+pytest-cov==4.1.0
+
+# Utilidades
+python-dotenv==1.0.0
+tqdm==4.66.1
+rich==13.7.0
+click==8.1.7
+
+# Desarrollo
+black==23.11.0
+flake8==6.1.0

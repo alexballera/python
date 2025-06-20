@@ -1,0 +1,48 @@
+# Módulo 2: Programación Orientada a Objetos
+# Dependencias para aprender POO, herencia, polimorfismo y patrones de diseño
+
+# Jupyter y extensiones
+jupyterlab==4.0.9
+notebook==7.0.6
+ipywidgets==8.1.1
+jupyter-dash==0.4.2
+
+# Herramientas de desarrollo
+black==23.11.0
+flake8==6.1.0
+autopep8==2.0.4
+mypy==1.7.1
+
+# Visualización de diagramas UML
+graphviz==0.20.1
+matplotlib==3.8.2
+plotly==5.17.0
+
+# Utilidades para POO y patrones
+attrs==23.1.0
+dataclasses-json==0.6.3
+pydantic==2.5.2
+
+# Testing avanzado
+pytest==7.4.3
+pytest-cov==4.1.0
+pytest-mock==3.12.0
+
+# Documentación
+sphinx==7.1.2
+sphinx-rtd-theme==2.0.0
+
+# Análisis de código
+pylint==3.0.3
+bandit==1.7.5
+
+# Matemáticas y ciencia
+numpy==1.24.4
+sympy==1.12
+
+# Utilidades
+requests==2.31.0
+python-dotenv==1.0.0
+rich==13.7.0
+tqdm==4.66.1
+click==8.1.7

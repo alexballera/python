@@ -1,0 +1,74 @@
+# Módulo 8: Proyectos Avanzados
+# Integración full-stack, deployment, DevOps, proyectos reales
+
+# Jupyter y extensiones
+jupyterlab==4.0.9
+notebook==7.0.6
+ipywidgets==8.1.1
+jupyter-dash==0.4.2
+
+# Web frameworks completos
+django==4.2.8
+flask==3.0.0
+fastapi==0.104.1
+streamlit==1.29.0
+dash==2.16.1
+
+# Frontend integration
+react==4.3.1
+
+# Bases de datos
+sqlalchemy==2.0.23
+psycopg2-binary==2.9.9
+pymongo==4.6.0
+redis==5.0.1
+
+# Cloud y deployment
+boto3==1.34.0  # AWS
+google-cloud==0.34.0  # Google Cloud
+azure-storage-blob==12.19.0  # Azure
+
+# Containers y orquestación
+docker==6.1.3
+
+# APIs y microservicios
+celery==5.3.4
+rabbitmq==0.2.0
+
+# Monitoring y logging
+sentry-sdk==1.38.0
+loguru==0.7.2
+
+# Testing completo
+pytest==7.4.3
+pytest-django==4.7.0
+pytest-flask==1.3.0
+pytest-asyncio==0.21.1
+selenium==4.15.2
+
+# CI/CD
+github-actions==1.0.0
+
+# Data Science completo
+pandas==2.1.4
+numpy==1.24.4
+scikit-learn==1.3.2
+tensorflow==2.15.0
+torch==2.1.1
+
+# Visualización avanzada
+matplotlib==3.8.2
+plotly==5.17.0
+bokeh==3.3.2
+
+# Utilities
+python-dotenv==1.0.0
+requests==2.31.0
+rich==13.7.0
+click==8.1.7
+tqdm==4.66.1
+
+# Desarrollo
+black==23.11.0
+flake8==6.1.0
+mypy==1.7.1

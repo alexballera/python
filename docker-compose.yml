@@ -1,0 +1,122 @@
+version: '3.8'
+
+services:
+  # Módulo 1: Fundamentos de Python
+  fundamentos:
+    build: ./modulos/01_fundamentos
+    container_name: python-fundamentos
+    ports:
+      - "8888:8888"
+    volumes:
+      - ./modulos/01_fundamentos/notebooks:/home/jovyan/work
+      - ./data:/home/jovyan/data
+    environment:
+      - JUPYTER_ENABLE_LAB=yes
+    profiles: ["fundamentos"]
+
+  # Módulo 2: Programación Orientada a Objetos
+  poo:
+    build: ./modulos/02_poo
+    container_name: python-poo
+    ports:
+      - "8889:8888"
+    volumes:
+      - ./modulos/02_poo/notebooks:/home/jovyan/work
+      - ./data:/home/jovyan/data
+    environment:
+      - JUPYTER_ENABLE_LAB=yes
+    profiles: ["poo"]
+
+  # Módulo 3: Estructuras de Datos y Algoritmos
+  algoritmos:
+    build: ./modulos/03_algoritmos
+    container_name: python-algoritmos
+    ports:
+      - "8890:8888"
+    volumes:
+      - ./modulos/03_algoritmos/notebooks:/home/jovyan/work
+      - ./data:/home/jovyan/data
+    environment:
+      - JUPYTER_ENABLE_LAB=yes
+    profiles: ["algoritmos"]
+
+  # Módulo 4: Desarrollo Web con Python
+  web:
+    build: ./modulos/04_web
+    container_name: python-web
+    ports:
+      - "8891:8888"
+      - "5000:5000"  # Flask
+      - "8000:8000"  # Django
+    volumes:
+      - ./modulos/04_web/notebooks:/home/jovyan/work
+      - ./data:/home/jovyan/data
+    environment:
+      - JUPYTER_ENABLE_LAB=yes
+    profiles: ["web"]
+
+  # Módulo 5: Análisis de Datos
+  analisis:
+    build: ./modulos/05_analisis_datos
+    container_name: python-analisis
+    ports:
+      - "8892:8888"
+    volumes:
+      - ./modulos/05_analisis_datos/notebooks:/home/jovyan/work
+      - ./data:/home/jovyan/data
+    environment:
+      - JUPYTER_ENABLE_LAB=yes
+    profiles: ["analisis"]
+
+  # Módulo 6: Machine Learning
+  ml:
+    build: ./modulos/06_machine_learning
+    container_name: python-ml
+    ports:
+      - "8893:8888"
+    volumes:
+      - ./modulos/06_machine_learning/notebooks:/home/jovyan/work
+      - ./data:/home/jovyan/data
+      - ./modelos:/home/jovyan/modelos
+    environment:
+      - JUPYTER_ENABLE_LAB=yes
+    profiles: ["ml"]
+
+  # Módulo 7: Deep Learning
+  dl:
+    build: ./modulos/07_deep_learning
+    container_name: python-dl
+    ports:
+      - "8894:8888"
+    volumes:
+      - ./modulos/07_deep_learning/notebooks:/home/jovyan/work
+      - ./data:/home/jovyan/data
+      - ./modelos:/home/jovyan/modelos
+    environment:
+      - JUPYTER_ENABLE_LAB=yes
+    profiles: ["dl"]
+
+  # Módulo 8: Proyectos Avanzados
+  proyectos:
+    build: ./modulos/08_proyectos
+    container_name: python-proyectos
+    ports:
+      - "8895:8888"
+      - "3000:3000"  # React frontend
+      - "5432:5432"  # PostgreSQL
+    volumes:
+      - ./modulos/08_proyectos/notebooks:/home/jovyan/work
+      - ./data:/home/jovyan/data
+      - ./proyectos:/home/jovyan/proyectos
+    environment:
+      - JUPYTER_ENABLE_LAB=yes
+    profiles: ["proyectos"]
+
+networks:
+  default:
+    name: python-learning-network
+
+volumes:
+  data:
+  modelos:
+  proyectos:

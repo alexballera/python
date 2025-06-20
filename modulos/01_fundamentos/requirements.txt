@@ -1,0 +1,32 @@
+# Módulo 1: Fundamentos de Python
+# Dependencias básicas para aprender Python desde cero
+
+# Jupyter y extensiones
+jupyterlab==4.0.9
+notebook==7.0.6
+ipywidgets==8.1.1
+jupyter-dash==0.4.2
+
+# Herramientas de desarrollo
+black==23.11.0
+flake8==6.1.0
+autopep8==2.0.4
+mypy==1.7.1
+
+# Matemáticas básicas
+numpy==1.24.4
+sympy==1.12
+
+# Visualización básica
+matplotlib==3.8.2
+plotly==5.17.0
+
+# Utilidades
+requests==2.31.0
+python-dotenv==1.0.0
+rich==13.7.0
+tqdm==4.66.1
+
+# Testing
+pytest==7.4.3
+pytest-cov==4.1.0
