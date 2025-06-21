@@ -1,0 +1,52 @@
+FROM python:3.11-slim
+
+LABEL maintainer="Curso Modular Python <info@cursomodularpython.com>"
+LABEL version="1.2"
+
+# Configuración para reducir el tamaño de la imagen
+ENV PYTHONDONTWRITEBYTECODE=1 \
+    PYTHONUNBUFFERED=1 \
+    PIP_NO_CACHE_DIR=off \
+    DEBIAN_FRONTEND=noninteractive
+
+# Instalar dependencias del sistema minimizadas
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    git \
+    vim-tiny \
+    curl \
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/*
+
+# Crear usuario no-root para seguridad
+RUN groupadd -g 1000 jupyter && \
+    useradd -m -u 1000 -g jupyter jupyter
+
+USER jupyter
+WORKDIR /home/jupyter/work
+
+# Crear un entorno virtual para tener las dependencias aisladas
+RUN python -m venv /home/jupyter/venv
+ENV PATH="/home/jupyter/venv/bin:$PATH"
+
+# Instalar jupyter y dependencias básicas para el funcionamiento
+RUN pip install --no-cache-dir --upgrade pip && \
+    pip install --no-cache-dir \
+    jupyterlab==4.0.9 \
+    notebook==7.0.6 \
+    ipywidgets==8.1.1
+
+# Configurar Jupyter de forma eficiente
+RUN mkdir -p ~/.jupyter && \
+    echo "c.ServerApp.token = ''" >> ~/.jupyter/jupyter_lab_config.py && \
+    echo "c.ServerApp.password = ''" >> ~/.jupyter/jupyter_lab_config.py && \
+    echo "c.ServerApp.allow_root = False" >> ~/.jupyter/jupyter_lab_config.py && \
+    echo "c.ServerApp.ip = '0.0.0.0'" >> ~/.jupyter/jupyter_lab_config.py && \
+    echo "c.ServerApp.notebook_dir = '/home/jupyter/work'" >> ~/.jupyter/jupyter_lab_config.py
+
+# Define un script de entrada personalizado
+COPY --chown=jupyter:jupyter docker-entrypoint.sh /usr/local/bin/
+RUN chmod +x /usr/local/bin/docker-entrypoint.sh
+
+EXPOSE 8888
+ENTRYPOINT ["docker-entrypoint.sh"]
+CMD ["jupyter", "lab", "--no-browser", "--port=8888"]

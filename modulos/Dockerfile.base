@@ -1,0 +1,35 @@
+FROM jupyter/minimal-notebook:python-3.11
+
+LABEL maintainer="Curso Modular Python <info@cursomodularpython.com>"
+LABEL description="Base Docker image for Python Course modules"
+LABEL version="1.0"
+
+USER root
+
+# Instalar dependencias del sistema esenciales (minimizadas)
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    git \
+    vim-tiny \
+    curl \
+    ca-certificates \
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/*
+
+USER jovyan
+
+# Crear un directorio de trabajo
+WORKDIR /home/jovyan/work
+
+# Configurar Jupyter (configuración común para todos los módulos)
+RUN jupyter lab --generate-config && \
+    echo "c.ServerApp.token = ''" >> ~/.jupyter/jupyter_lab_config.py && \
+    echo "c.ServerApp.password = ''" >> ~/.jupyter/jupyter_lab_config.py && \
+    echo "c.ServerApp.allow_root = True" >> ~/.jupyter/jupyter_lab_config.py && \
+    echo "c.ServerApp.ip = '0.0.0.0'" >> ~/.jupyter/jupyter_lab_config.py && \
+    echo "c.ServerApp.notebook_dir = '/home/jovyan/work'" >> ~/.jupyter/jupyter_lab_config.py
+
+# Exponer puerto
+EXPOSE 8888
+
+# Comando por defecto
+CMD ["jupyter", "lab", "--ip=0.0.0.0", "--port=8888", "--no-browser", "--allow-root"]

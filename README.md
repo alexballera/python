@@ -239,6 +239,38 @@ chmod +x manage.sh
 
 ## 🎓 Metodología de Aprendizaje
 
+### 🚀 Flujo de Trabajo Optimizado
+
+El proyecto ofrece dos formas de trabajo que se complementan:
+
+1. **Usando Docker (Recomendado para ejecución completa)**
+   ```bash
+   # Construir la imagen base (solo primera vez)
+   ./manage.sh build-base
+   
+   # Construir e iniciar un módulo
+   ./manage.sh build fundamentos
+   ./manage.sh start fundamentos
+   
+   # Acceder a Jupyter Lab
+   # http://localhost:8888
+   ```
+
+2. **Usando Entorno Virtual (Para desarrollo rápido)**
+   ```bash
+   # Crear y activar entorno virtual
+   python -m venv .venv
+   source .venv/bin/activate  # Linux/Mac
+   
+   # Instalar dependencias básicas
+   pip install jupyter notebook ipykernel
+   
+   # Registrar el kernel
+   python -m ipykernel install --user --name=python-curso
+   ```
+
+Esta combinación da flexibilidad para trabajar con ambientes consistentes (Docker) y hacer desarrollo rápido (entorno local).
+
 ### Enfoque Práctico
 
 Cada módulo sigue la metodología **Learn by Doing**:
@@ -456,10 +488,12 @@ El proyecto está en desarrollo activo con las siguientes prioridades:
    - Deep Learning (Módulo 7)
    - Proyectos Avanzados (Módulo 8)
 
-3. **Mejoras de infraestructura**:
-   - Optimizar los Dockerfiles para reducir el tamaño de las imágenes
-   - Mejorar las capacidades del script de gestión
-   - Implementar monitorización de recursos
+3. **Mejoras de infraestructura implementadas**:
+   - ✅ Dockerfiles optimizados con imagen base compartida para reducir tamaño (~30%) y mejorar mantenibilidad
+   - ✅ Script de gestión mejorado con validaciones adicionales y mejor manejo de errores
+   - ✅ Flujo de trabajo dual: Docker para ejecución completa y entorno virtual local para desarrollo rápido
+   - ✅ Usuario no-root en contenedores para mayor seguridad
+   - 🔄 En progreso: Implementación de monitorización de recursos y métricas de rendimiento
 
 ### Contribuciones Bienvenidas
 

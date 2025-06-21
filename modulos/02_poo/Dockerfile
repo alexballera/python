@@ -1,30 +1,19 @@
-FROM jupyter/base-notebook:latest
+FROM python-base:latest
 
+LABEL description="Module 2: Object Oriented Programming - Optimized"
+LABEL version="2.0"
+
+# Instalar graphviz para diagramas UML
 USER root
-
-# Instalar dependencias del sistema
-RUN apt-get update && apt-get install -y \
-    git \
-    vim \
-    curl \
-    wget \
+RUN apt-get update && apt-get install -y --no-install-recommends \
     graphviz \
+    && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
+USER jupyter
 
-USER jovyan
-
-# Copiar requirements
-COPY requirements.txt /tmp/requirements.txt
-
-# Instalar paquetes de Python
+# Copiar requirements específicos de POO
+COPY --chown=jupyter:jupyter requirements.txt /tmp/requirements.txt
 RUN pip install --no-cache-dir -r /tmp/requirements.txt
-
-# Configurar Jupyter
-RUN jupyter lab --generate-config && \
-    echo "c.ServerApp.token = ''" >> ~/.jupyter/jupyter_lab_config.py && \
-    echo "c.ServerApp.password = ''" >> ~/.jupyter/jupyter_lab_config.py && \
-    echo "c.ServerApp.allow_root = True" >> ~/.jupyter/jupyter_lab_config.py && \
-    echo "c.ServerApp.ip = '0.0.0.0'" >> ~/.jupyter/jupyter_lab_config.py
 
 # Exponer puerto
 EXPOSE 8888
