@@ -28,11 +28,10 @@ networkx==3.2.1
 # Análisis de rendimiento
 memory-profiler==0.61.0
 line-profiler==4.1.1
-cProfile
 
 # Estructuras de datos avanzadas
 sortedcontainers==2.4.0
-blist==1.3.6
+# blist==1.3.6  # Removido: incompatible con Python 3.11+, usar sortedcontainers en su lugar
 
 # Testing
 pytest==7.4.3

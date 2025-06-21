@@ -1,0 +1,55 @@
+# Módulo 4: Desarrollo Web
+# Dependencias para Flask, Django, FastAPI y desarrollo web
+
+# Jupyter y extensiones
+jupyterlab==4.0.9
+notebook==7.0.6
+ipywidgets==8.1.1
+
+# Frameworks web
+flask==3.0.0
+django==4.2.7
+fastapi==0.104.1
+uvicorn==0.24.0
+gunicorn==21.2.0
+
+# Base de datos
+sqlalchemy==2.0.23
+psycopg2-binary==2.9.9
+
+# ORM y migraciones
+alembic==1.13.0
+django-extensions==3.2.3
+
+# APIs y serialización
+djangorestframework==3.14.0
+marshmallow==3.20.1
+pydantic==2.5.0
+
+# Autenticación y seguridad
+flask-login==0.6.3
+django-allauth==0.57.0
+python-jose==3.3.0
+passlib==1.7.4
+bcrypt==4.1.1
+
+# Testing web
+pytest==7.4.3
+pytest-django==4.7.0
+pytest-flask==1.3.0
+requests==2.31.0
+
+# Frontend integration
+jinja2==3.1.2
+wtforms==3.1.0
+
+# Utilities
+python-dotenv==1.0.0
+celery==5.3.4
+redis==5.0.1
+pillow==10.1.0
+
+# Desarrollo
+black==23.11.0
+flake8==6.1.0
+mypy==1.7.1
