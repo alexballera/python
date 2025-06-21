@@ -36,10 +36,10 @@ flask-migrate==4.0.5
 
 # Autenticación y seguridad
 flask-jwt-extended==4.6.0
-django-rest-framework==3.14.0
+djangorestframework==3.14.0
 passlib==1.7.4
 bcrypt==4.1.2
-cryptography==41.0.8
+cryptography==41.0.7  # Downgraded to be compatible with pyopenssl
 
 # Testing web
 pytest==7.4.3
