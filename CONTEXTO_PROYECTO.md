@@ -3,7 +3,7 @@
 ## 🎯 Resumen del Proyecto
 
 **Fecha de creación**: 20 de junio, 2025
-**Estado actual**: Estructura completa implementada, Módulo 1 funcionando
+**Estado actual**: Estructura completa implementada, Módulos 1 y 2 funcionando
 **Ubicación**: `/home/alexballera/proyectos/personal/learn/python`
 
 ### 🔍 Qué se ha logrado hasta ahora:
@@ -28,25 +28,21 @@
 ```bash
 /home/alexballera/proyectos/personal/learn/python/
 ├── 🐳 docker-compose.yml      # Orquestación completa
-├── 🐳 docker-compose.optimized.yml # Orquestación optimizada
 ├── 🐳 Dockerfile.base         # Imagen base compartida
 ├── 🛠️ manage.sh               # Script de gestión (EJECUTABLE)
-├── 🛠️ manage.sh.optimized     # Script de gestión optimizado
 ├── 📖 README.md               # Documentación completa
 ├── 📊 data/                   # Datasets compartidos
 ├── 🤖 modelos/                # Modelos ML/DL compartidos
 ├── 🚀 proyectos/              # Proyectos finales
 └── 📚 modulos/
     ├── 01_fundamentos/        # ✅ COMPLETADO - Puerto 8888
-    │   ├── Dockerfile         # Configurado y funcional
-    │   ├── Dockerfile.optimized # Versión optimizada
-    │   ├── requirements.txt   # Dependencias básicas
-    │   ├── requirements.txt.optimized # Dependencias optimizadas
+    │   ├── Dockerfile         # Configurado y optimizado
+    │   ├── requirements.txt   # Dependencias optimizadas
     │   └── notebooks/
     │       └── 01_introduccion_python.ipynb  # Notebook completo
     ├── 02_poo/               # ✅ COMPLETADO - Puerto 8889
-    │   ├── Dockerfile.optimized # Versión optimizada
-    │   ├── requirements.txt.optimized # Dependencias optimizadas
+    │   ├── Dockerfile         # Configurado y optimizado
+    │   ├── requirements.txt   # Dependencias optimizadas
     │   └── notebooks/
     │       └── 01_introduccion_poo.ipynb  # Notebook completo
     ├── 03_algoritmos/        # ✅ ESTRUCTURA LISTA - Puerto 8890
@@ -284,9 +280,9 @@ docker ps
 - Verificar que los puertos no estén ocupados por otros servicios
 
 ### Archivos clave para revisar:
-- `docker-compose.yml` y `docker-compose.optimized.yml` - Configuración de servicios
+- `docker-compose.yml` - Configuración de servicios
 - `Dockerfile.base` - Imagen base compartida para todos los módulos
-- `manage.sh` y `manage.sh.optimized` - Scripts de gestión
+- `manage.sh` - Script de gestión
 - `README.md` - Documentación completa
 - `modulos/01_fundamentos/notebooks/01_introduccion_python.ipynb` - Contenido educativo
 - `modulos/02_poo/notebooks/01_introduccion_poo.ipynb` - Contenido POO
