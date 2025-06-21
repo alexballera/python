@@ -178,11 +178,35 @@ Cada módulo tiene su propio ambiente Docker con las dependencias específicas n
 
 ### Instalación
 
-```bash
-# Clonar el repositorio
-git clone <repository-url>
-cd python
+Hay tres formas de clonar el repositorio:
 
+#### 1. Usando HTTPS
+
+```bash
+# Clonar el repositorio con HTTPS
+git clone https://github.com/alexballera/python.git
+cd python
+```
+
+#### 2. Usando SSH (requiere configuración previa de claves SSH)
+
+```bash
+# Clonar el repositorio con SSH
+git clone git@github.com:alexballera/python.git
+cd python
+```
+
+#### 3. Usando GitHub CLI
+
+```bash
+# Clonar el repositorio con GitHub CLI
+gh repo clone alexballera/python
+cd python
+```
+
+Una vez clonado el repositorio:
+
+```bash
 # Dar permisos de ejecución al script de gestión
 chmod +x manage.sh
 
@@ -217,11 +241,13 @@ chmod +x manage.sh
 ### Flujo de Trabajo Recomendado
 
 1. **Comenzar con Fundamentos**:
+
    ```bash
    ./manage.sh build fundamentos
    ./manage.sh start fundamentos
    ```
-   Accede a: http://localhost:8888
+   
+   Accede a: [http://localhost:8888](http://localhost:8888)
 
 2. **Progresión Secuencial**:
    - Completa cada módulo antes de pasar al siguiente
@@ -229,6 +255,7 @@ chmod +x manage.sh
    - Usa diferentes puertos para tener múltiples módulos activos
 
 3. **Gestión de Recursos**:
+
    ```bash
    # Detener módulos no utilizados
    ./manage.sh stop fundamentos
@@ -244,6 +271,7 @@ chmod +x manage.sh
 El proyecto ofrece dos formas de trabajo que se complementan:
 
 1. **Usando Docker (Recomendado para ejecución completa)**
+
    ```bash
    # Construir la imagen base (solo primera vez)
    ./manage.sh build-base
@@ -257,6 +285,7 @@ El proyecto ofrece dos formas de trabajo que se complementan:
    ```
 
 2. **Usando Entorno Virtual (Para desarrollo rápido)**
+
    ```bash
    # Crear y activar entorno virtual
    python -m venv .venv
@@ -348,21 +377,27 @@ gantt
 ## 🎯 Objetivos de Aprendizaje por Nivel
 
 ### 🟢 Nivel Básico (Módulos 1-2)
+
 Al completar este nivel serás capaz de:
+
 - Escribir programas Python funcionales
 - Aplicar principios de POO
 - Debuggear y testing básico
 - Trabajar con archivos y APIs simples
 
-### 🟡 Nivel Intermedio (Módulos 3-4)  
+### 🟡 Nivel Intermedio (Módulos 3-4)
+
 Al completar este nivel serás capaz de:
+
 - Diseñar algoritmos eficientes
 - Crear aplicaciones web completas
 - Trabajar con bases de datos
 - Implementar APIs REST profesionales
 
 ### 🔴 Nivel Avanzado (Módulos 5-8)
+
 Al completar este nivel serás capaz de:
+
 - Analizar y visualizar datos complejos
 - Construir modelos de Machine Learning
 - Implementar redes neuronales
@@ -447,7 +482,7 @@ Este proyecto está bajo la Licencia MIT. Ver [LICENSE](LICENSE) para más detal
 ./manage.sh start fundamentos
 ```
 
-¡Nos vemos en http://localhost:8888! 🐍✨
+¡Nos vemos en [http://localhost:8888](http://localhost:8888)! 🐍✨
 
 ## 🔧 Notas Técnicas
 
@@ -458,6 +493,7 @@ Algunos módulos pueden presentar conflictos de dependencias debido a las difere
 **Problema:** Conflicto entre `pyopenssl` (que requiere `cryptography<42`) y la versión más reciente de `cryptography` (43.0.3).
 
 **Solución aplicada:**
+
 ```bash
 # En modulos/04_web/requirements.txt
 cryptography==41.0.7  # Versión compatible con pyopenssl
@@ -468,6 +504,7 @@ Este tipo de ajustes puede ser necesario en otros módulos a medida que evolucio
 ### Optimización de Imágenes Docker
 
 Los Dockerfiles están optimizados para:
+
 - Minimizar el tamaño de las imágenes
 - Acelerar el tiempo de construcción
 - Proporcionar todas las dependencias necesarias sin redundancias
@@ -498,6 +535,7 @@ El proyecto está en desarrollo activo con las siguientes prioridades:
 ### Contribuciones Bienvenidas
 
 Se agradecen contribuciones en las siguientes áreas:
+
 - Contenido educativo adicional
 - Correcciones de errores
 - Mejoras en la documentación
