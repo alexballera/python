@@ -143,6 +143,33 @@ Cada módulo tiene su propio ambiente Docker con las dependencias específicas n
 
 ## 🚀 Instalación y Configuración
 
+### Notas de Versión y Problemas Resueltos
+
+#### Versión Actual (Junio 2025)
+
+- ✅ Módulos 1-4 (Fundamentos, POO, Algoritmos, Web) construidos y probados con éxito
+- ✅ Estructura para módulos 5-8 preparada y lista para desarrollo
+- ✅ Problemas de dependencias solucionados en el módulo Web:
+  - Conflicto entre `pyopenssl` y `cryptography` resuelto usando versión compatible (41.0.7)
+
+#### Problemas Conocidos
+
+- El atributo `version` en docker-compose.yml está obsoleto (genera una advertencia, pero no afecta la funcionalidad)
+- Asegúrate de que los puertos requeridos (8888-8895) estén disponibles en tu sistema
+
+### Estado Actual del Proyecto
+
+| Módulo | Estado | Puerto | Docker Image |
+|--------|--------|--------|--------------|
+| **Fundamentos** | ✅ **ACTIVO** | 8888 | `python-fundamentos` |
+| **POO** | ✅ **CONSTRUIDO** | 8889 | `python-poo` |
+| **Algoritmos** | ✅ **CONSTRUIDO** | 8890 | `python-algoritmos` |
+| **Web** | ✅ **CONSTRUIDO** | 8891 | `python-web` |
+| **Análisis** | 🔨 Estructura lista | 8892 | Pendiente build |
+| **ML** | 🔨 Estructura lista | 8893 | Pendiente build |
+| **DL** | 🔨 Estructura lista | 8894 | Pendiente build |
+| **Proyectos** | 🔨 Estructura lista | 8895 | Pendiente build |
+
 ### Prerrequisitos
 
 - Docker y Docker Compose instalados
@@ -389,3 +416,55 @@ Este proyecto está bajo la Licencia MIT. Ver [LICENSE](LICENSE) para más detal
 ```
 
 ¡Nos vemos en http://localhost:8888! 🐍✨
+
+## 🔧 Notas Técnicas
+
+### Resolución de Problemas de Dependencias
+
+Algunos módulos pueden presentar conflictos de dependencias debido a las diferentes versiones de las bibliotecas requeridas. Un caso destacado fue en el módulo Web:
+
+**Problema:** Conflicto entre `pyopenssl` (que requiere `cryptography<42`) y la versión más reciente de `cryptography` (43.0.3).
+
+**Solución aplicada:**
+```bash
+# En modulos/04_web/requirements.txt
+cryptography==41.0.7  # Versión compatible con pyopenssl
+```
+
+Este tipo de ajustes puede ser necesario en otros módulos a medida que evolucionen las dependencias. El enfoque modular del proyecto ayuda a aislar estos problemas para que no afecten todo el curso.
+
+### Optimización de Imágenes Docker
+
+Los Dockerfiles están optimizados para:
+- Minimizar el tamaño de las imágenes
+- Acelerar el tiempo de construcción
+- Proporcionar todas las dependencias necesarias sin redundancias
+
+## 🔄 Próximos Pasos
+
+### Desarrollo Continuo
+
+El proyecto está en desarrollo activo con las siguientes prioridades:
+
+1. **Completar contenido de los módulos construidos**:
+   - Desarrollar notebooks adicionales para POO, Algoritmos y Web
+   - Implementar proyectos prácticos para cada módulo
+
+2. **Construir y probar los módulos restantes**:
+   - Análisis de Datos (Módulo 5)
+   - Machine Learning (Módulo 6)
+   - Deep Learning (Módulo 7)
+   - Proyectos Avanzados (Módulo 8)
+
+3. **Mejoras de infraestructura**:
+   - Optimizar los Dockerfiles para reducir el tamaño de las imágenes
+   - Mejorar las capacidades del script de gestión
+   - Implementar monitorización de recursos
+
+### Contribuciones Bienvenidas
+
+Se agradecen contribuciones en las siguientes áreas:
+- Contenido educativo adicional
+- Correcciones de errores
+- Mejoras en la documentación
+- Optimizaciones de infraestructura
