@@ -1,0 +1,561 @@
+{
+ "cells": [
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "# 📊 Análisis de Datos con Python - Módulo 5\n",
+    "\n",
+    "## Bienvenido al Módulo de Análisis de Datos\n",
+    "\n",
+    "### 📚 Contenido del Módulo 5:\n",
+    "1. **Introducción al análisis de datos**\n",
+    "2. **Manipulación de datos con Pandas**\n",
+    "3. **Análisis exploratorio de datos (EDA)**\n",
+    "4. **Manipulación avanzada de datos**\n",
+    "5. **Visualización avanzada**\n",
+    "6. **Extracción de datos**\n",
+    "7. **Proyecto: Análisis de datos de COVID-19**\n",
+    "\n",
+    "### 🎯 Objetivos de Aprendizaje:\n",
+    "- Dominar la manipulación de datos con Pandas\n",
+    "- Realizar análisis exploratorio efectivo\n",
+    "- Crear visualizaciones impactantes\n",
+    "- Extraer datos de diversas fuentes\n",
+    "- Aplicar técnicas de análisis a datos reales\n",
+    "- Construir dashboards interactivos"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "---\n",
+    "\n",
+    "## 1. 📈 Introducción al Análisis de Datos\n",
+    "\n",
+    "El análisis de datos es el proceso de inspeccionar, limpiar, transformar y modelar datos con el objetivo de descubrir información útil, informar conclusiones y apoyar la toma de decisiones.\n",
+    "\n",
+    "### 🌟 ¿Por qué Python para análisis de datos?\n",
+    "\n",
+    "Python se ha convertido en el lenguaje preferido para análisis de datos por varias razones:\n",
+    "\n",
+    "- **Ecosistema rico**: Pandas, NumPy, Matplotlib, Scikit-learn\n",
+    "- **Sintaxis clara y legible**: Facilita el desarrollo y mantenimiento\n",
+    "- **Comunidad activa**: Abundantes recursos y bibliotecas\n",
+    "- **Versatilidad**: Desde análisis básico hasta machine learning avanzado\n",
+    "- **Integración**: Funciona bien con otras herramientas y sistemas"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "# Importar las bibliotecas principales para análisis de datos\n",
+    "import pandas as pd\n",
+    "import numpy as np\n",
+    "import matplotlib.pyplot as plt\n",
+    "import seaborn as sns\n",
+    "\n",
+    "# Configuración para visualizaciones más atractivas\n",
+    "plt.style.use('ggplot')\n",
+    "sns.set(style=\"whitegrid\")\n",
+    "\n",
+    "# Mostrar versiones\n",
+    "print(f\"Pandas version: {pd.__version__}\")\n",
+    "print(f\"NumPy version: {np.__version__}\")\n",
+    "print(f\"Matplotlib version: {plt.__version__}\")\n",
+    "print(f\"Seaborn version: {sns.__version__}\")"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "### 🔄 Flujo de trabajo típico en análisis de datos\n",
+    "\n",
+    "1. **Obtención de datos**: Recolectar datos de diversas fuentes\n",
+    "2. **Limpieza de datos**: Manejar valores faltantes, duplicados, errores\n",
+    "3. **Exploración**: Análisis estadístico y visualización inicial\n",
+    "4. **Transformación**: Crear nuevas variables, normalizar, agregar\n",
+    "5. **Análisis**: Aplicar técnicas estadísticas y modelos\n",
+    "6. **Visualización**: Crear gráficos y dashboards informativos\n",
+    "7. **Comunicación**: Presentar hallazgos y conclusiones"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "---\n",
+    "\n",
+    "## 2. 🐼 Manipulación de datos con Pandas\n",
+    "\n",
+    "Pandas es la biblioteca más importante para manipulación y análisis de datos en Python. Proporciona estructuras de datos flexibles y herramientas para trabajar con datos estructurados.\n",
+    "\n",
+    "### 📋 Estructuras de datos principales:\n",
+    "\n",
+    "1. **Series**: Array unidimensional etiquetado\n",
+    "2. **DataFrame**: Tabla bidimensional con columnas potencialmente de diferentes tipos"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "# Crear una Series\n",
+    "s = pd.Series([1, 3, 5, 7, 9], index=['a', 'b', 'c', 'd', 'e'])\n",
+    "print(\"Series de Pandas:\")\n",
+    "print(s)\n",
+    "print(\"\\nTipo de datos:\", type(s))\n",
+    "\n",
+    "# Crear un DataFrame\n",
+    "data = {\n",
+    "    'Nombre': ['Ana', 'Carlos', 'María', 'Pedro', 'Laura'],\n",
+    "    'Edad': [28, 34, 29, 42, 31],\n",
+    "    'Ciudad': ['Madrid', 'Barcelona', 'Sevilla', 'Valencia', 'Bilbao'],\n",
+    "    'Puntuación': [85, 92, 78, 96, 89]\n",
+    "}\n",
+    "\n",
+    "df = pd.DataFrame(data)\n",
+    "print(\"\\nDataFrame de Pandas:\")\n",
+    "print(df)\n",
+    "\n",
+    "# Información básica del DataFrame\n",
+    "print(\"\\nInformación del DataFrame:\")\n",
+    "print(df.info())\n",
+    "\n",
+    "# Estadísticas descriptivas\n",
+    "print(\"\\nEstadísticas descriptivas:\")\n",
+    "print(df.describe())"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "### 📥 Carga de datos desde diferentes fuentes\n",
+    "\n",
+    "Pandas puede leer datos de múltiples formatos:"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "# Ejemplo de carga de datos (comentado para evitar errores)\n",
+    "\n",
+    "# CSV\n",
+    "# df_csv = pd.read_csv('datos/ejemplo.csv')\n",
+    "\n",
+    "# Excel\n",
+    "# df_excel = pd.read_excel('datos/ejemplo.xlsx', sheet_name='Hoja1')\n",
+    "\n",
+    "# JSON\n",
+    "# df_json = pd.read_json('datos/ejemplo.json')\n",
+    "\n",
+    "# SQL (requiere SQLAlchemy)\n",
+    "# from sqlalchemy import create_engine\n",
+    "# engine = create_engine('sqlite:///ejemplo.db')\n",
+    "# df_sql = pd.read_sql('SELECT * FROM tabla', engine)\n",
+    "\n",
+    "# Crear un DataFrame de ejemplo para continuar\n",
+    "df_ventas = pd.DataFrame({\n",
+    "    'Fecha': pd.date_range(start='2023-01-01', periods=10),\n",
+    "    'Producto': ['A', 'B', 'A', 'C', 'B', 'A', 'C', 'B', 'A', 'C'],\n",
+    "    'Cantidad': [10, 5, 15, 8, 12, 20, 7, 9, 14, 11],\n",
+    "    'Precio': [100, 200, 100, 150, 200, 100, 150, 200, 100, 150],\n",
+    "    'Vendedor': ['Juan', 'María', 'Juan', 'Pedro', 'María', 'Juan', 'Pedro', 'María', 'Juan', 'Pedro']\n",
+    "})\n",
+    "\n",
+    "print(\"DataFrame de ventas:\")\n",
+    "print(df_ventas.head())"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "### 🧹 Limpieza y transformación de datos\n",
+    "\n",
+    "La limpieza de datos es una parte crucial del análisis:"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "# Crear un DataFrame con problemas comunes\n",
+    "df_sucio = pd.DataFrame({\n",
+    "    'A': [1, 2, np.nan, 4, 5],\n",
+    "    'B': [5, 6, 7, np.nan, 9],\n",
+    "    'C': ['a', 'b', 'c', 'd', np.nan]\n",
+    "})\n",
+    "\n",
+    "print(\"DataFrame con valores faltantes:\")\n",
+    "print(df_sucio)\n",
+    "\n",
+    "# Detectar valores faltantes\n",
+    "print(\"\\nValores faltantes por columna:\")\n",
+    "print(df_sucio.isna().sum())\n",
+    "\n",
+    "# Rellenar valores faltantes\n",
+    "df_limpio1 = df_sucio.fillna({'A': 0, 'B': 0, 'C': 'desconocido'})\n",
+    "print(\"\\nDataFrame con valores faltantes rellenados:\")\n",
+    "print(df_limpio1)\n",
+    "\n",
+    "# Eliminar filas con valores faltantes\n",
+    "df_limpio2 = df_sucio.dropna()\n",
+    "print(\"\\nDataFrame con filas con valores faltantes eliminadas:\")\n",
+    "print(df_limpio2)"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "### 🔍 Filtrado y selección de datos\n",
+    "\n",
+    "Pandas ofrece múltiples formas de seleccionar y filtrar datos:"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "# Volvemos al DataFrame de ventas\n",
+    "print(\"DataFrame de ventas:\")\n",
+    "print(df_ventas)\n",
+    "\n",
+    "# Selección de columnas\n",
+    "print(\"\\nSelección de columnas:\")\n",
+    "print(df_ventas[['Producto', 'Cantidad']])\n",
+    "\n",
+    "# Filtrado con condiciones\n",
+    "print(\"\\nVentas del producto A:\")\n",
+    "print(df_ventas[df_ventas['Producto'] == 'A'])\n",
+    "\n",
+    "# Filtrado con múltiples condiciones\n",
+    "print(\"\\nVentas del producto A con cantidad > 10:\")\n",
+    "print(df_ventas[(df_ventas['Producto'] == 'A') & (df_ventas['Cantidad'] > 10)])\n",
+    "\n",
+    "# Selección por índice con .loc\n",
+    "print(\"\\nSelección por índice con .loc:\")\n",
+    "print(df_ventas.loc[2:4, ['Fecha', 'Producto', 'Cantidad']])\n",
+    "\n",
+    "# Selección por posición con .iloc\n",
+    "print(\"\\nSelección por posición con .iloc:\")\n",
+    "print(df_ventas.iloc[2:5, 0:3])"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "### 📊 Operaciones de agrupación y agregación\n",
+    "\n",
+    "Las operaciones de agrupación permiten realizar análisis por categorías:"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "# Calcular total de ventas\n",
+    "df_ventas['Total'] = df_ventas['Cantidad'] * df_ventas['Precio']\n",
+    "\n",
+    "# Agrupar por producto\n",
+    "print(\"Ventas por producto:\")\n",
+    "ventas_por_producto = df_ventas.groupby('Producto').agg({\n",
+    "    'Cantidad': 'sum',\n",
+    "    'Total': 'sum'\n",
+    "})\n",
+    "print(ventas_por_producto)\n",
+    "\n",
+    "# Agrupar por vendedor\n",
+    "print(\"\\nVentas por vendedor:\")\n",
+    "ventas_por_vendedor = df_ventas.groupby('Vendedor').agg({\n",
+    "    'Cantidad': 'sum',\n",
+    "    'Total': 'sum'\n",
+    "})\n",
+    "print(ventas_por_vendedor)\n",
+    "\n",
+    "# Múltiples niveles de agrupación\n",
+    "print(\"\\nVentas por vendedor y producto:\")\n",
+    "ventas_detalladas = df_ventas.groupby(['Vendedor', 'Producto']).agg({\n",
+    "    'Cantidad': 'sum',\n",
+    "    'Total': 'sum'\n",
+    "})\n",
+    "print(ventas_detalladas)"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "### 🎯 Ejercicio Práctico 1: Análisis de ventas\n",
+    "\n",
+    "Utilizando el DataFrame de ventas, realiza las siguientes tareas:\n",
+    "\n",
+    "1. Calcula el promedio de ventas por día\n",
+    "2. Encuentra el producto más vendido\n",
+    "3. Identifica al vendedor con mayor ingreso total\n",
+    "4. Crea una nueva columna 'Mes' y agrupa las ventas por mes"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "# Tu código aquí\n",
+    "\n",
+    "# 1. Promedio de ventas por día\n",
+    "\n",
+    "# 2. Producto más vendido\n",
+    "\n",
+    "# 3. Vendedor con mayor ingreso\n",
+    "\n",
+    "# 4. Ventas por mes"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "---\n",
+    "\n",
+    "## 3. 🔍 Análisis Exploratorio de Datos (EDA)\n",
+    "\n",
+    "El Análisis Exploratorio de Datos (EDA) es un enfoque para analizar conjuntos de datos con el fin de resumir sus características principales, a menudo utilizando métodos visuales.\n",
+    "\n",
+    "### 📊 Estadísticas descriptivas\n",
+    "\n",
+    "Las estadísticas descriptivas nos ayudan a entender la distribución y características de nuestros datos:"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "# Crear un DataFrame con datos más complejos para EDA\n",
+    "np.random.seed(42)\n",
+    "n = 1000\n",
+    "\n",
+    "df_eda = pd.DataFrame({\n",
+    "    'edad': np.random.normal(35, 10, n).astype(int),\n",
+    "    'ingreso': np.random.lognormal(10, 0.5, n).astype(int),\n",
+    "    'gastos': np.random.lognormal(9, 0.4, n).astype(int),\n",
+    "    'score_credito': np.random.normal(700, 100, n).clip(300, 850).astype(int),\n",
+    "    'genero': np.random.choice(['M', 'F'], n),\n",
+    "    'educacion': np.random.choice(['Primaria', 'Secundaria', 'Universidad', 'Posgrado'], n,\n",
+    "                                 p=[0.1, 0.3, 0.4, 0.2]),\n",
+    "    'region': np.random.choice(['Norte', 'Sur', 'Este', 'Oeste', 'Centro'], n)\n",
+    "})\n",
+    "\n",
+    "# Añadir algunas variables derivadas\n",
+    "df_eda['ahorro'] = df_eda['ingreso'] - df_eda['gastos']\n",
+    "df_eda['ratio_gasto'] = df_eda['gastos'] / df_eda['ingreso']\n",
+    "\n",
+    "# Mostrar las primeras filas\n",
+    "print(\"DataFrame para EDA:\")\n",
+    "print(df_eda.head())\n",
+    "\n",
+    "# Estadísticas descriptivas\n",
+    "print(\"\\nEstadísticas descriptivas:\")\n",
+    "print(df_eda.describe())\n",
+    "\n",
+    "# Información sobre variables categóricas\n",
+    "print(\"\\nDistribución de género:\")\n",
+    "print(df_eda['genero'].value_counts())\n",
+    "\n",
+    "print(\"\\nDistribución de educación:\")\n",
+    "print(df_eda['educacion'].value_counts())"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "### 📈 Visualización con Matplotlib y Seaborn\n",
+    "\n",
+    "La visualización es clave para entender patrones en los datos:"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "# Configuración para visualizaciones más atractivas\n",
+    "plt.style.use('ggplot')\n",
+    "sns.set(style=\"whitegrid\")\n",
+    "\n",
+    "# Crear una figura con múltiples subplots\n",
+    "fig, axes = plt.subplots(2, 2, figsize=(14, 10))\n",
+    "\n",
+    "# Histograma de edad\n",
+    "sns.histplot(df_eda['edad'], kde=True, ax=axes[0, 0])\n",
+    "axes[0, 0].set_title('Distribución de Edad')\n",
+    "\n",
+    "# Histograma de ingresos\n",
+    "sns.histplot(df_eda['ingreso'], kde=True, ax=axes[0, 1])\n",
+    "axes[0, 1].set_title('Distribución de Ingresos')\n",
+    "\n",
+    "# Gráfico de barras para educación\n",
+    "sns.countplot(x='educacion', data=df_eda, ax=axes[1, 0])\n",
+    "axes[1, 0].set_title('Nivel Educativo')\n",
+    "axes[1, 0].set_xticklabels(axes[1, 0].get_xticklabels(), rotation=45)\n",
+    "\n",
+    "# Gráfico de barras para región\n",
+    "sns.countplot(x='region', data=df_eda, ax=axes[1, 1])\n",
+    "axes[1, 1].set_title('Distribución por Región')\n",
+    "\n",
+    "plt.tight_layout()\n",
+    "plt.show()"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "# Relaciones entre variables\n",
+    "fig, axes = plt.subplots(1, 3, figsize=(18, 5))\n",
+    "\n",
+    "# Scatter plot: Ingreso vs Gastos\n",
+    "sns.scatterplot(x='ingreso', y='gastos', hue='genero', data=df_eda, ax=axes[0])\n",
+    "axes[0].set_title('Ingreso vs Gastos')\n",
+    "\n",
+    "# Box plot: Score de crédito por nivel educativo\n",
+    "sns.boxplot(x='educacion', y='score_credito', data=df_eda, ax=axes[1])\n",
+    "axes[1].set_title('Score de Crédito por Nivel Educativo')\n",
+    "axes[1].set_xticklabels(axes[1].get_xticklabels(), rotation=45)\n",
+    "\n",
+    "# Violin plot: Ahorro por género\n",
+    "sns.violinplot(x='genero', y='ahorro', data=df_eda, ax=axes[2])\n",
+    "axes[2].set_title('Distribución de Ahorro por Género')\n",
+    "\n",
+    "plt.tight_layout()\n",
+    "plt.show()"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "### 🔄 Correlaciones y patrones\n",
+    "\n",
+    "Analizar correlaciones nos ayuda a identificar relaciones entre variables:"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "# Calcular matriz de correlación\n",
+    "corr_matrix = df_eda.select_dtypes(include=[np.number]).corr()\n",
+    "\n",
+    "# Visualizar matriz de correlación\n",
+    "plt.figure(figsize=(10, 8))\n",
+    "sns.heatmap(corr_matrix, annot=True, cmap='coolwarm', vmin=-1, vmax=1, fmt='.2f')\n",
+    "plt.title('Matriz de Correlación')\n",
+    "plt.show()\n",
+    "\n",
+    "# Pairplot para visualizar relaciones entre múltiples variables\n",
+    "sns.pairplot(df_eda[['edad', 'ingreso', 'gastos', 'score_credito', 'genero']], hue='genero')\n",
+    "plt.suptitle('Relaciones entre Variables Numéricas por Género', y=1.02)\n",
+    "plt.show()"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "### 🎯 Ejercicio Práctico 2: Análisis Exploratorio\n",
+    "\n",
+    "Utilizando el DataFrame `df_eda`, realiza las siguientes tareas:\n",
+    "\n",
+    "1. Identifica las variables con mayor correlación\n",
+    "2. Crea un gráfico que muestre la relación entre educación, ingreso y ahorro\n",
+    "3. Analiza si hay diferencias significativas en el ratio de gasto por región\n",
+    "4. Identifica posibles valores atípicos en el score de crédito"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "# Tu código aquí\n",
+    "\n",
+    "# 1. Variables con mayor correlación\n",
+    "\n",
+    "# 2. Relación entre educación, ingreso y ahorro\n",
+    "\n",
+    "# 3. Ratio de gasto por región\n",
+    "\n",
+    "# 4. Valores atípicos en score de crédito"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "---\n",
+    "\n",
+    "## Continuará...\n",
+    "\n",
+    "Este notebook continuaría con las siguientes secciones:\n",
+    "\n",
+    "4. **Manipulación avanzada de datos**\n",
+    "5. **Visualización avanzada**\n",
+    "6. **Extracción de datos**\n",
+    "7. **Proyecto integrador: Análisis de datos de COVID-19**\n",
+    "\n",
+    "Cada sección seguiría el mismo formato con explicaciones teóricas, ejemplos de código y ejercicios prácticos."
+   ]
+  }
+ ],
+ "metadata": {
+  "kernelspec": {
+   "display_name": "Python 3",
+   "language": "python",
+   "name": "python3"
+  },
+  "language_info": {
+   "codemirror_mode": {
+    "name": "ipython",
+    "version": 3
+   },
+   "file_extension": ".py",
+   "mimetype": "text/x-python",
+   "name": "python",
+   "nbconvert_exporter": "python",
+   "pygments_lexer": "ipython3",
+   "version": "3.8.10"
+  }
+ },
+ "nbformat": 4,
+ "nbformat_minor": 4
+}
