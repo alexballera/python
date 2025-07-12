@@ -21,6 +21,7 @@ show_help() {
     echo -e "${YELLOW}Comandos disponibles:${NC}"
     echo "  help                    - Muestra esta ayuda"
     echo "  list                    - Lista todos los módulos disponibles"
+    echo "  build-base              - Construye la imagen base (requerido antes del primer build)"
     echo "  build [modulo]          - Construye un módulo específico"
     echo "  build-all               - Construye todos los módulos"
     echo "  start [modulo]          - Inicia un módulo específico"
@@ -42,6 +43,7 @@ show_help() {
     echo "  proyectos               - Módulo 8: Proyectos Avanzados (puerto 8895)"
     echo ""
     echo -e "${YELLOW}Ejemplos:${NC}"
+    echo "  $0 build-base           - Construye la imagen base (necesario antes del primer build)"
     echo "  $0 start fundamentos    - Inicia el módulo de fundamentos"
     echo "  $0 build ml             - Construye el módulo de machine learning"
     echo "  $0 status               - Muestra todos los contenedores activos"
@@ -92,12 +94,32 @@ get_module_path() {
     esac
 }
 
+# Función para construir la imagen base
+build_base() {
+    echo -e "${YELLOW}🔨 Construyendo imagen base python-base...${NC}"
+    
+    if [ ! -f "docker/Dockerfile.base" ]; then
+        echo -e "${RED}❌ Error: Archivo docker/Dockerfile.base no encontrado${NC}"
+        return 1
+    fi
+    
+    docker build -t python-base:latest -f docker/Dockerfile.base docker/
+    echo -e "${GREEN}✅ Imagen base python-base construida exitosamente${NC}"
+}
+
 # Función para construir un módulo
 build_module() {
     local module=$1
     local module_path=$(get_module_path $module)
     
     if ! validate_module $module; then
+        return 1
+    fi
+    
+    # Verificar si la imagen base existe
+    if ! docker image inspect python-base:latest &>/dev/null; then
+        echo -e "${RED}❌ Error: La imagen base 'python-base:latest' no existe${NC}"
+        echo -e "${YELLOW}💡 Ejecuta primero: $0 build-base${NC}"
         return 1
     fi
     
@@ -213,6 +235,9 @@ case "${1:-help}" in
         ;;
     list)
         list_modules
+        ;;
+    build-base)
+        build_base
         ;;
     build)
         if [ -z "$2" ]; then

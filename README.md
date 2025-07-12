@@ -222,6 +222,9 @@ chmod +x manage.sh
 # Listar todos los módulos disponibles
 ./manage.sh list
 
+# Construir la imagen base (solo necesario la primera vez)
+./manage.sh build-base
+
 # Construir un módulo específico
 ./manage.sh build fundamentos
 
@@ -240,7 +243,13 @@ chmod +x manage.sh
 
 ### Flujo de Trabajo Recomendado
 
-1. **Comenzar con Fundamentos**:
+1. **Construir la imagen base** (solo necesario la primera vez):
+
+   ```bash
+   ./manage.sh build-base
+   ```
+
+2. **Comenzar con Fundamentos**:
 
    ```bash
    ./manage.sh build fundamentos
@@ -249,12 +258,12 @@ chmod +x manage.sh
    
    Accede a: [http://localhost:8888](http://localhost:8888)
 
-2. **Progresión Secuencial**:
+3. **Progresión Secuencial**:
    - Completa cada módulo antes de pasar al siguiente
    - Construye el siguiente módulo mientras trabajas en el actual
    - Usa diferentes puertos para tener múltiples módulos activos
 
-3. **Gestión de Recursos**:
+4. **Gestión de Recursos**:
 
    ```bash
    # Detener módulos no utilizados

@@ -1,5 +1,3 @@
-version: '3.8'
-
 services:
   # Módulo 1: Fundamentos de Python - OPTIMIZADO
   fundamentos:
