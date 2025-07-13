@@ -1,7 +1,7 @@
 # CONTEXTO RÁPIDO - Curso Python Docker
 
 **IMPORTANTE**: 
-- Estamos en `/home/alexballera/proyectos/personal/learn/python`
+- Estamos en **directorio raíz del curso Python** (debe tener docker-compose.yml, Makefile, manage.sh)
 - TODO funciona con Docker containers (NO Python local)
 - Usar SIEMPRE comandos `make` (ej: `make start-ml`)
 - Responder SIEMPRE en ESPAÑOL

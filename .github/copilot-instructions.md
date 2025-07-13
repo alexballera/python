@@ -3,7 +3,7 @@
 ## 🚨 **CONTEXTO CRÍTICO - LEE ESTO PRIMERO**
 
 ### **Ubicación y Ambiente**
-- **Directorio de trabajo**: `/home/alexballera/proyectos/personal/learn/python`
+- **Directorio de trabajo**: **Raíz del proyecto curso Python** (donde están docker-compose.yml, Makefile, manage.sh)
 - **Sistema**: Linux (bash shell)
 - **Ambiente principal**: **Docker containers con Jupyter notebooks**
 - **Idioma**: **SIEMPRE responder en ESPAÑOL**
@@ -193,7 +193,7 @@ docker ps                   # Verificar salud de contenedores
 
 ### **SIEMPRE hacer esto ANTES de responder:**
 1. **Responder en ESPAÑOL** - el usuario es hispanohablante
-2. Verificar que estamos en `/home/alexballera/proyectos/personal/learn/python`
+2. **Verificar que estamos en el directorio raíz del curso Python** (debe existir docker-compose.yml, Makefile, manage.sh)
 3. Recordar que TODO funciona con Docker containers
 4. Usar comandos `make` como primera opción
 5. Verificar estado con `make status` si hay dudas
