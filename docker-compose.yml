@@ -8,8 +8,8 @@ services:
     ports:
       - "8888:8888"
     volumes:
-      - ./modulos/01_fundamentos/notebooks:/home/jupyter/work
-      - ./data:/home/jupyter/data
+      - ./modulos/01_fundamentos/notebooks:/home/jovyan/work
+      - ./data:/home/jovyan/data
     environment:
       - JUPYTER_ENABLE_LAB=yes
     restart: unless-stopped
@@ -29,8 +29,8 @@ services:
     ports:
       - "8889:8888"
     volumes:
-      - ./modulos/02_poo/notebooks:/home/jupyter/work
-      - ./data:/home/jupyter/data
+      - ./modulos/02_poo/notebooks:/home/jovyan/work
+      - ./data:/home/jovyan/data
     environment:
       - JUPYTER_ENABLE_LAB=yes
     restart: unless-stopped
@@ -48,8 +48,8 @@ services:
     ports:
       - "8890:8888"
     volumes:
-      - ./modulos/03_algoritmos/notebooks:/home/jupyter/work
-      - ./data:/home/jupyter/data
+      - ./modulos/03_algoritmos/notebooks:/home/jovyan/work
+      - ./data:/home/jovyan/data
     environment:
       - JUPYTER_ENABLE_LAB=yes
     profiles: ["algoritmos"]
@@ -63,8 +63,8 @@ services:
       - "5000:5000"  # Flask
       - "8000:8000"  # Django
     volumes:
-      - ./modulos/04_web/notebooks:/home/jupyter/work
-      - ./data:/home/jupyter/data
+      - ./modulos/04_web/notebooks:/home/jovyan/work
+      - ./data:/home/jovyan/data
     environment:
       - JUPYTER_ENABLE_LAB=yes
     profiles: ["web"]
@@ -76,8 +76,8 @@ services:
     ports:
       - "8892:8888"
     volumes:
-      - ./modulos/05_analisis_datos/notebooks:/home/jupyter/work
-      - ./data:/home/jupyter/data
+      - ./modulos/05_analisis_datos/notebooks:/home/jovyan/work
+      - ./data:/home/jovyan/data
     environment:
       - JUPYTER_ENABLE_LAB=yes
     profiles: ["analisis"]
@@ -89,9 +89,9 @@ services:
     ports:
       - "8893:8888"
     volumes:
-      - ./modulos/06_machine_learning/notebooks:/home/jupyter/work
-      - ./data:/home/jupyter/data
-      - ./modelos:/home/jupyter/modelos
+      - ./modulos/06_machine_learning/notebooks:/home/jovyan/work
+      - ./data:/home/jovyan/data
+      - ./modelos:/home/jovyan/modelos
     environment:
       - JUPYTER_ENABLE_LAB=yes
     profiles: ["ml"]
@@ -103,9 +103,9 @@ services:
     ports:
       - "8894:8888"
     volumes:
-      - ./modulos/07_deep_learning/notebooks:/home/jupyter/work
-      - ./data:/home/jupyter/data
-      - ./modelos:/home/jupyter/modelos
+      - ./modulos/07_deep_learning/notebooks:/home/jovyan/work
+      - ./data:/home/jovyan/data
+      - ./modelos:/home/jovyan/modelos
     environment:
       - JUPYTER_ENABLE_LAB=yes
     profiles: ["dl"]
@@ -119,9 +119,9 @@ services:
       - "3000:3000"  # React frontend
       - "5432:5432"  # PostgreSQL
     volumes:
-      - ./modulos/08_proyectos/notebooks:/home/jupyter/work
-      - ./data:/home/jupyter/data
-      - ./proyectos:/home/jupyter/proyectos
+      - ./modulos/08_proyectos/notebooks:/home/jovyan/work
+      - ./data:/home/jovyan/data
+      - ./proyectos:/home/jovyan/proyectos
     environment:
       - JUPYTER_ENABLE_LAB=yes
     profiles: ["proyectos"]
