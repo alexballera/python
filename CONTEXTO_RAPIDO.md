@@ -1,17 +1,29 @@
 # CONTEXTO RÁPIDO - Curso Python Docker
 
-**IMPORTANTE**: 
-- Estamos en **directorio raíz del curso Python** (debe tener docker-compose.yml, Makefile, manage.sh)
-- TODO funciona con Docker containers (NO Python local)
-- Usar SIEMPRE comandos `make` (ej: `make start-ml`)
-- Responder SIEMPRE en ESPAÑOL
+## 🚨 CRÍTICO
+- **Directorio**: Raíz del curso Python (debe tener docker-compose.yml, Makefile, manage.sh)
+- **Docker obligatorio**: NO usar Python local
+- **Idioma**: **SIEMPRE ESPAÑOL**
 
-**Módulos disponibles**: fundamentos(8888), poo(8889), algoritmos(8890), web(8891), analisis(8892), ml(8893), dl(8894), proyectos(8895)
+## ⚡ Comandos Clave
+```bash
+make setup              # Setup inicial
+make start-fundamentos  # Iniciar módulo (puerto 8888)
+make start-ml           # ML (puerto 8893)
+make status             # Ver estado
+make stop-all           # Detener todo
+make clean-outputs-all  # Limpiar antes commits
+```
 
-**Comandos clave**:
-- `make status` - ver estado
-- `make start-[modulo]` - iniciar módulo  
-- `make stop-all` - detener todos
-- `make clean-outputs-all` - limpiar antes de commits
+## 📚 Módulos (Puertos 8888-8895)
+- **01_fundamentos** (8888) - **02_poo** (8889) - **03_algoritmos** (8890)
+- **04_web** (8891) - **05_analisis** (8892) - **06_ml** (8893)
+- **07_dl** (8894) - **08_proyectos** (8895)
+
+## 🛠️ Alternativa
+```bash
+./manage.sh start fundamentos
+./manage.sh build ml
+```
 
 **NUNCA sugerir**: pip install, python local, docker run manual
