@@ -2,12 +2,6 @@
 	"folders": [
 		{
 			"path": "."
-		},
-		{
-			"path": "../../../boreal/rMotion/rMotion-Front"
-		},
-		{
-			"path": "../../../../mcp-servers"
 		}
 	],
 	"settings": {}
