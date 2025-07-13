@@ -210,11 +210,98 @@ Una vez clonado el repositorio:
 # Dar permisos de ejecución al script de gestión
 chmod +x manage.sh
 
-# Ver ayuda del gestor
+# Ver ayuda del gestor de scripts
 ./manage.sh help
+
+# O usar el Makefile (recomendado)
+make help
 ```
 
 ## 📖 Guía de Uso
+
+### Opción 1: Usando Makefile (Recomendado)
+
+El proyecto incluye un Makefile completo que simplifica todas las operaciones:
+
+#### Configuración Inicial
+
+```bash
+# Configuración completa del proyecto
+make setup
+
+# Verificar dependencias del sistema
+make check-deps
+
+# Test rápido del proyecto
+make quick-test
+```
+
+#### Comandos Básicos con Make
+
+```bash
+# Listar módulos disponibles
+make list
+
+# Construir imagen base
+make build-base
+
+# Construir módulo específico
+make build-fundamentos
+
+# Iniciar módulo específico
+make start-fundamentos
+
+# Ver estado de módulos
+make status
+
+# Detener módulo específico
+make stop-fundamentos
+
+# Ver logs de módulo específico
+make logs-fundamentos
+```
+
+#### Comandos de Limpieza y Mantenimiento con Make
+
+```bash
+# Limpiar outputs de módulo específico
+make clean-outputs-fundamentos
+
+# Limpiar outputs de todos los notebooks
+make clean-outputs-all
+
+# Resetear módulo específico
+make reset-fundamentos
+
+# Resetear todos los módulos
+make reset-all
+
+# Limpieza completa del proyecto
+make clean-all
+
+# Preparar proyecto para compartir
+make prepare-share
+```
+
+#### Comandos de Desarrollo con Make
+
+```bash
+# Iniciar entorno de desarrollo
+make dev-start
+
+# Información sobre puertos
+make ports
+
+# Información de Docker
+make docker-info
+
+# Reset completo del proyecto
+make full-reset
+```
+
+### Opción 2: Usando el Script manage.sh
+
+También puedes usar directamente el script de gestión:
 
 ### Comandos Básicos
 
@@ -241,7 +328,72 @@ chmod +x manage.sh
 ./manage.sh logs fundamentos
 ```
 
+### Comandos de Limpieza y Mantenimiento
+
+```bash
+# Limpiar outputs de notebooks de un módulo específico
+./manage.sh clean-outputs fundamentos
+
+# Limpiar outputs de todos los notebooks
+./manage.sh clean-all-outputs
+
+# Resetear un módulo (detiene, limpia outputs y archivos temporales)
+./manage.sh reset fundamentos
+
+# Resetear todos los módulos
+./manage.sh reset-all
+
+# Limpiar contenedores e imágenes Docker no utilizadas
+./manage.sh clean
+```
+
 ### Flujo de Trabajo Recomendado
+
+#### Con Makefile (Recomendado)
+
+1. **Configuración inicial**:
+
+   ```bash
+   make setup
+   ```
+
+2. **Comenzar con Fundamentos**:
+
+   ```bash
+   make start-fundamentos
+   ```
+   
+   Accede a: [http://localhost:8888](http://localhost:8888)
+
+3. **Progresión Secuencial**:
+   - Completa cada módulo antes de pasar al siguiente
+   - Construye el siguiente módulo: `make build-poo`
+   - Inicia el siguiente módulo: `make start-poo`
+
+4. **Gestión de Recursos**:
+
+   ```bash
+   # Detener módulos no utilizados
+   make stop-fundamentos
+   
+   # Limpiar recursos del sistema
+   make clean
+   ```
+
+5. **Limpieza y Reseteo**:
+
+   ```bash
+   # Antes de compartir el proyecto
+   make prepare-share
+   
+   # Para reiniciar un módulo desde cero
+   make reset-fundamentos
+   
+   # Para resetear todo el proyecto
+   make full-reset
+   ```
+
+#### Con Script manage.sh
 
 1. **Construir la imagen base** (solo necesario la primera vez):
 
@@ -272,6 +424,214 @@ chmod +x manage.sh
    # Limpiar recursos del sistema
    ./manage.sh clean
    ```
+
+5. **Limpieza y Reseteo**:
+
+   ```bash
+   # Antes de compartir el proyecto, limpiar outputs
+   ./manage.sh clean-all-outputs
+   
+   # Para reiniciar un módulo desde cero
+   ./manage.sh reset fundamentos
+   
+   # Para resetear todo el proyecto
+   ./manage.sh reset-all
+   ```
+
+## 🛠️ Gestión Completa del Proyecto
+
+### 🎯 Dos Formas de Gestionar el Proyecto
+
+#### Opción 1: Makefile (Recomendado)
+
+El proyecto incluye un **Makefile completo** que simplifica todas las operaciones con comandos más cortos y organizados:
+
+```bash
+make help                    # Ayuda completa
+make setup                   # Configuración inicial completa
+make start-fundamentos       # Inicia módulo de fundamentos
+make clean-all              # Limpieza completa
+make prepare-share          # Prepara para compartir
+```
+
+#### Opción 2: Script manage.sh
+
+También puedes usar directamente el script de gestión para más control:
+
+```bash
+./manage.sh help             # Ayuda completa
+./manage.sh build-base       # Construir imagen base
+./manage.sh start fundamentos # Iniciar módulo
+```
+
+### 📋 Comandos Principales con Makefile
+
+#### Configuración y Construcción
+
+```bash
+make setup                   # Configuración inicial completa
+make build-base             # Construir imagen base
+make build-fundamentos      # Construir módulo específico
+make build-all              # Construir todos los módulos
+make check-deps             # Verificar dependencias
+make quick-test             # Test rápido del proyecto
+```
+
+#### Gestión de Módulos
+
+```bash
+make start-fundamentos      # Iniciar módulo (puerto 8888)
+make stop-fundamentos       # Detener módulo
+make restart-fundamentos    # Reiniciar módulo
+make logs-fundamentos       # Ver logs del módulo
+make stop-all               # Detener todos los módulos
+```
+
+#### Limpieza y Mantenimiento
+
+```bash
+make clean                  # Limpiar contenedores Docker
+make clean-outputs-all      # Limpiar outputs de notebooks
+make clean-outputs-fundamentos # Limpiar outputs de módulo específico
+make reset-fundamentos      # Resetear módulo específico
+make reset-all              # Resetear todos los módulos
+make clean-all              # Limpieza completa del proyecto
+make prepare-share          # Preparar proyecto para compartir
+```
+
+#### Información y Monitoreo
+
+```bash
+make status                 # Estado de todos los módulos
+make list                   # Listar módulos disponibles
+make ports                  # Mostrar puertos de cada módulo
+make docker-info            # Información de contenedores Docker
+```
+
+### 📋 Lista de Comandos Disponibles con Script
+
+El script `manage.sh` proporciona una interfaz completa para gestionar todos los aspectos del proyecto:
+
+#### Comandos de Construcción e Inicio
+
+```bash
+./manage.sh build-base          # Construir imagen base (necesario la primera vez)
+./manage.sh build [modulo]      # Construir módulo específico
+./manage.sh build-all           # Construir todos los módulos
+./manage.sh start [modulo]      # Iniciar módulo específico
+./manage.sh stop [modulo]       # Detener módulo específico
+./manage.sh restart [modulo]    # Reiniciar módulo específico
+./manage.sh stop-all            # Detener todos los módulos
+```
+
+#### Comandos de Información y Monitoreo
+
+```bash
+./manage.sh help                # Mostrar ayuda completa
+./manage.sh list                # Listar módulos disponibles
+./manage.sh status              # Estado de todos los módulos
+./manage.sh logs [modulo]       # Ver logs de un módulo específico
+```
+
+#### Comandos de Limpieza y Mantenimiento Avanzados
+
+```bash
+./manage.sh clean               # Limpiar contenedores Docker no utilizados
+./manage.sh clean-outputs [modulo]     # Limpiar outputs de notebooks de un módulo
+./manage.sh clean-all-outputs   # Limpiar outputs de todos los notebooks
+./manage.sh reset [modulo]      # Resetear módulo (detener + limpiar + archivos temporales)
+./manage.sh reset-all           # Resetear todos los módulos
+```
+
+### 🔧 Casos de Uso Comunes
+
+#### Usando Makefile (Recomendado)
+
+##### Preparación para Compartir
+
+```bash
+# Preparación completa en un solo comando
+make prepare-share
+```
+
+##### Reset de Módulo Problemático
+
+```bash
+# Resetear módulo específico
+make reset-fundamentos
+
+# O resetear todo el proyecto
+make full-reset
+```
+
+##### Flujo de Desarrollo Diario
+
+```bash
+# Iniciar entorno de desarrollo
+make dev-start
+
+# Monitorear el estado
+make status
+
+# Ver logs si hay problemas
+make logs-fundamentos
+
+# Terminar sesión
+make stop-fundamentos
+```
+
+#### Usando Script manage.sh
+
+##### Preparación Manual para Compartir
+
+```bash
+# Limpiar todos los outputs de notebooks
+./manage.sh clean-all-outputs
+
+# Detener todos los módulos
+./manage.sh stop-all
+
+# Limpiar recursos Docker
+./manage.sh clean
+```
+
+##### Reset Manual de Módulo Problemático
+
+```bash
+# Resetear módulo específico (limpia outputs, archivos temporales y reinicia)
+./manage.sh reset fundamentos
+
+# O resetear todo el proyecto
+./manage.sh reset-all
+```
+
+##### Flujo Manual de Desarrollo
+
+```bash
+# Iniciar sesión de trabajo
+./manage.sh start fundamentos
+
+# Monitorear el estado
+./manage.sh status
+
+# Ver logs si hay problemas
+./manage.sh logs fundamentos
+
+# Terminar sesión
+./manage.sh stop fundamentos
+```
+
+### 📁 Archivos Limpiados por el Reset
+
+Cuando ejecutas `reset`, el script elimina automáticamente:
+
+- **Outputs de notebooks**: Celdas ejecutadas y resultados
+- **Archivos Python temporales**: `*.pyc`, `__pycache__/`
+- **Checkpoints de Jupyter**: `.ipynb_checkpoints/`
+- **Archivos de log**: `*.log`
+- **Archivos temporales**: `*.tmp`
+
+Esto garantiza que el proyecto esté limpio y listo para compartir o para un nuevo inicio.
 
 ## 🎓 Metodología de Aprendizaje
 
@@ -537,8 +897,13 @@ El proyecto está en desarrollo activo con las siguientes prioridades:
 3. **Mejoras de infraestructura implementadas**:
    - ✅ Dockerfiles optimizados con imagen base compartida para reducir tamaño (~30%) y mejorar mantenibilidad
    - ✅ Script de gestión mejorado con validaciones adicionales y mejor manejo de errores
+   - ✅ **Makefile completo** con comandos simplificados y organizados
+   - ✅ Comandos de limpieza y reseteo para mantenimiento del proyecto
+   - ✅ Limpieza automática de outputs de notebooks para compartir proyectos
+   - ✅ Gestión de archivos temporales y checkpoints
    - ✅ Flujo de trabajo dual: Docker para ejecución completa y entorno virtual local para desarrollo rápido
    - ✅ Usuario no-root en contenedores para mayor seguridad
+   - ✅ Comandos combinados para flujos de trabajo comunes (`prepare-share`, `dev-start`, `quick-test`)
    - 🔄 En progreso: Implementación de monitorización de recursos y métricas de rendimiento
 
 ### Contribuciones Bienvenidas
