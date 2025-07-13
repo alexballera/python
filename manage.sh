@@ -29,6 +29,10 @@ show_help() {
     echo "  restart [modulo]        - Reinicia un módulo específico"
     echo "  stop-all                - Detiene todos los módulos"
     echo "  clean                   - Limpia contenedores e imágenes no utilizadas"
+    echo "  clean-outputs [modulo]  - Limpia outputs de notebooks de un módulo"
+    echo "  clean-all-outputs       - Limpia outputs de todos los notebooks"
+    echo "  reset [modulo]          - Resetea un módulo (limpia outputs y reinicia)"
+    echo "  reset-all               - Resetea todos los módulos"
     echo "  status                  - Muestra el estado de todos los módulos"
     echo "  logs [modulo]           - Muestra los logs de un módulo"
     echo ""
@@ -46,6 +50,8 @@ show_help() {
     echo "  $0 build-base           - Construye la imagen base (necesario antes del primer build)"
     echo "  $0 start fundamentos    - Inicia el módulo de fundamentos"
     echo "  $0 build ml             - Construye el módulo de machine learning"
+    echo "  $0 clean-outputs web    - Limpia outputs del módulo web"
+    echo "  $0 reset fundamentos    - Resetea el módulo fundamentos"
     echo "  $0 status               - Muestra todos los contenedores activos"
 }
 
@@ -228,6 +234,94 @@ clean() {
     echo -e "${GREEN}✅ Limpieza completada${NC}"
 }
 
+# Función para limpiar outputs de notebooks de un módulo
+clean_outputs() {
+    local module=$1
+    local module_path=$(get_module_path $module)
+    
+    if ! validate_module $module; then
+        return 1
+    fi
+    
+    echo -e "${YELLOW}🧹 Limpiando outputs de notebooks del módulo: $module${NC}"
+    
+    local notebook_path="modulos/$module_path/notebooks"
+    if [ -d "$notebook_path" ]; then
+        # Usar jupyter nbconvert para limpiar outputs
+        find "$notebook_path" -name "*.ipynb" -type f | while read notebook; do
+            echo -e "${BLUE}  📓 Limpiando: $(basename "$notebook")${NC}"
+            jupyter nbconvert --ClearOutputPreprocessor.enabled=True --inplace "$notebook" 2>/dev/null || {
+                # Fallback: usar sed para eliminar outputs básicos
+                sed -i '/"outputs": \[/,/\]/c\   "outputs": [],' "$notebook"
+                sed -i '/"execution_count": [0-9]*/c\   "execution_count": null,' "$notebook"
+            }
+        done
+        echo -e "${GREEN}✅ Outputs limpiados del módulo $module${NC}"
+    else
+        echo -e "${RED}❌ Error: Directorio de notebooks no encontrado: $notebook_path${NC}"
+    fi
+}
+
+# Función para limpiar outputs de todos los módulos
+clean_all_outputs() {
+    echo -e "${YELLOW}🧹 Limpiando outputs de todos los notebooks...${NC}"
+    
+    local modules=("fundamentos" "poo" "algoritmos" "web" "analisis" "ml" "dl" "proyectos")
+    for module in "${modules[@]}"; do
+        clean_outputs $module
+    done
+    
+    echo -e "${GREEN}✅ Todos los outputs limpiados${NC}"
+}
+
+# Función para resetear un módulo
+reset_module() {
+    local module=$1
+    
+    if ! validate_module $module; then
+        return 1
+    fi
+    
+    echo -e "${YELLOW}🔄 Reseteando módulo: $module${NC}"
+    
+    # Detener el módulo si está corriendo
+    echo -e "${BLUE}  ⏹️  Deteniendo módulo...${NC}"
+    docker compose --profile $module down 2>/dev/null || true
+    
+    # Limpiar outputs
+    clean_outputs $module
+    
+    # Limpiar archivos temporales
+    local module_path=$(get_module_path $module)
+    if [ -d "modulos/$module_path" ]; then
+        echo -e "${BLUE}  🗑️  Limpiando archivos temporales...${NC}"
+        find "modulos/$module_path" -name "*.pyc" -delete 2>/dev/null || true
+        find "modulos/$module_path" -name "__pycache__" -type d -exec rm -rf {} + 2>/dev/null || true
+        find "modulos/$module_path" -name ".ipynb_checkpoints" -type d -exec rm -rf {} + 2>/dev/null || true
+        find "modulos/$module_path" -name "*.log" -delete 2>/dev/null || true
+        find "modulos/$module_path" -name "*.tmp" -delete 2>/dev/null || true
+    fi
+    
+    echo -e "${GREEN}✅ Módulo $module reseteado${NC}"
+}
+
+# Función para resetear todos los módulos
+reset_all() {
+    echo -e "${YELLOW}🔄 Reseteando todos los módulos...${NC}"
+    
+    # Detener todos los módulos
+    echo -e "${BLUE}  ⏹️  Deteniendo todos los módulos...${NC}"
+    docker compose down 2>/dev/null || true
+    
+    # Resetear cada módulo
+    local modules=("fundamentos" "poo" "algoritmos" "web" "analisis" "ml" "dl" "proyectos")
+    for module in "${modules[@]}"; do
+        reset_module $module
+    done
+    
+    echo -e "${GREEN}✅ Todos los módulos reseteados${NC}"
+}
+
 # Procesamiento de argumentos
 case "${1:-help}" in
     help)
@@ -290,6 +384,28 @@ case "${1:-help}" in
         ;;
     clean)
         clean
+        ;;
+    clean-outputs)
+        if [ -z "$2" ]; then
+            echo -e "${RED}❌ Error: Especifica un módulo para limpiar outputs${NC}"
+            echo "Usa '$0 list' para ver los módulos disponibles"
+            exit 1
+        fi
+        clean_outputs "$2"
+        ;;
+    clean-all-outputs)
+        clean_all_outputs
+        ;;
+    reset)
+        if [ -z "$2" ]; then
+            echo -e "${RED}❌ Error: Especifica un módulo para resetear${NC}"
+            echo "Usa '$0 list' para ver los módulos disponibles"
+            exit 1
+        fi
+        reset_module "$2"
+        ;;
+    reset-all)
+        reset_all
         ;;
     *)
         echo -e "${RED}❌ Error: Comando '$1' no reconocido${NC}"
